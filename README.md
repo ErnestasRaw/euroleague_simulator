@@ -4,6 +4,13 @@
 
 This project simulates the Euroleague season by analyzing historical game results and forecasting remaining matches. The simulation uses Elo ratings to estimate team performance and simulates games multiple times to determine expected wins and final positions.
 
+### How It Works
+
+1. Historical game data is loaded and processed to calculate initial Elo ratings and determine the dynamic home advantage.
+2. The remaining games are simulated thousands of times (based on a predefined number of simulations) to predict final standings.
+3. Results are exported as CSV files and visualized in tables and graphs.
+4. Each team’s performance details are generated into individual reports and images.
+
 ### Home Advantage Calculation
 
 The home advantage is dynamically computed as the average margin by which home teams outscore away teams in past games. This average point margin is then added to a team's Elo rating when playing at home, increasing their win probability.
@@ -32,13 +39,6 @@ For each team, a folder is created under `output/default/teams/<TeamName>`. For 
   ![Team detail table](output/default/teams/Zalgiris_Kaunas/team_detail_table.png)
 - `finishing_probabilities.png` – A graph of regular season finishing probabilities.
   ![Team finishing progbabilities](output/default/teams/Zalgiris_Kaunas/finishing_probabilities.png)
-
-## How It Works
-
-1. Historical game data is loaded and processed to calculate initial Elo ratings and determine the dynamic home advantage.
-2. The remaining games are simulated thousands of times (based on a predefined number of simulations) to predict final standings.
-3. Results are exported as CSV files and visualized in tables and graphs.
-4. Each team’s performance details are generated into individual reports and images.
 
 ## Dependencies
 
