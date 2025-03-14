@@ -1,4 +1,4 @@
-# Zalgiris Euroleague Simulation
+# Euroleague Simulation
 
 ## Overview
 
