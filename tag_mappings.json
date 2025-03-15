@@ -1,7 +1,0 @@
-{
-  "default_mapping": {
-    "Team": "Team",
-    "AvgWins": "Expected Wins",
-    "AvgPosition": "Expected Final Position"
-  }
-}

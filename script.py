@@ -22,70 +22,123 @@ class StepFilter(logging.Filter):
 
 def load_and_prepare_data():
     try:
-        games_raw = pd.read_csv(os.path.join(INPUT_DIR, "results.csv"))
-        games = games_raw[pd.to_numeric(games_raw["HomePTS"], errors='coerce').notnull()][["HomeTeam", "AwayTeam", "HomePTS", "AwayPTS"]]
-        teams = list(set(games['HomeTeam']).union(set(games['AwayTeam'])))
+        file_path = os.path.join(INPUT_DIR, "euroleague_regular_season_games.csv")
+        games_raw = pd.read_csv(file_path)
+        
+        completed_games_data = []
+        scheduled_games_data = []
+        
+        current_round = None
+        for _, row in games_raw.iterrows():
+            # Check if this is a round header row
+            first_cell = str(row.iloc[0]) if pd.notna(row.iloc[0]) else ""
+            if first_cell.startswith("Round "):
+                try:
+                    current_round = int(''.join(filter(str.isdigit, first_cell)))
+                except (ValueError, TypeError):
+                    current_round = None
+                continue
+            
+            # Skip rows without team names
+            if pd.isna(row['TEAM_A']) or pd.isna(row['TEAM_B']):
+                continue
+                
+            home_team = str(row['TEAM_A']).strip()
+            away_team = str(row['TEAM_B']).strip()
+            
+            # Check if game is completed or scheduled
+            if pd.notna(row['A_SCORE']) and row['A_SCORE'] != '-':
+                # Completed game
+                try:
+                    home_score = int(row['A_SCORE'])
+                    away_score = int(row['B_SCORE'])
+                    completed_games_data.append({
+                        'HomeTeam': home_team,
+                        'AwayTeam': away_team,
+                        'HomePTS': home_score,
+                        'AwayPTS': away_score,
+                        'Round': current_round
+                    })
+                except (ValueError, TypeError):
+                    logging.warning(f"Invalid score format: {row['A_SCORE']}-{row['B_SCORE']} for {home_team} vs {away_team}")
+            else:
+                # Scheduled game
+                scheduled_games_data.append({
+                    'Home': home_team,
+                    'Away': away_team,
+                    'Round': current_round
+                })
+        
+        completed_games = pd.DataFrame(completed_games_data)
+        scheduled_games = pd.DataFrame(scheduled_games_data)
+        
+        # Calculate dynamic home advantage if we have completed games
+        if not completed_games.empty:
+            dynamic_home_advantage = (completed_games["HomePTS"] - completed_games["AwayPTS"]).mean()
+        else:
+            dynamic_home_advantage = 3.5  # Default home advantage if no completed games
+            
+        # Get unique teams from both completed and scheduled games
+        teams_completed = set(completed_games["HomeTeam"].tolist() + completed_games["AwayTeam"].tolist()) if not completed_games.empty else set()
+        teams_scheduled = set(scheduled_games["Home"].tolist() + scheduled_games["Away"].tolist()) if not scheduled_games.empty else set()
+        teams = list(filter(None, teams_completed.union(teams_scheduled)))
+        
         elo = {team: INITIAL_ELO for team in teams}
         current_wins = {team: 0 for team in teams}
-        games["HomePTS_numeric"] = pd.to_numeric(games["HomePTS"], errors="coerce")
-        games["AwayPTS_numeric"] = pd.to_numeric(games["AwayPTS"], errors="coerce")
-        dynamic_home_advantage = games["HomePTS_numeric"].sub(games["AwayPTS_numeric"]).mean()
-        for _, row in games.iterrows():
-            home, away = row['HomeTeam'], row['AwayTeam']
-            try:
-                home_pts = float(row['HomePTS'])
-                away_pts = float(row['AwayPTS'])
-            except:
-                continue
+        
+        # Update ELO ratings based on completed games
+        for _, row in completed_games.iterrows():
+            home, away = row["HomeTeam"], row["AwayTeam"]
+            home_pts, away_pts = row["HomePTS"], row["AwayPTS"]
+            
             if home_pts > away_pts:
                 S_home, S_away = 1, 0
                 current_wins[home] += 1
             else:
                 S_home, S_away = 0, 1
                 current_wins[away] += 1
+                
             home_E = 1 / (1 + 10 ** ((elo[away] - (elo[home] + dynamic_home_advantage)) / 400))
             away_E = 1 / (1 + 10 ** (((elo[home] + dynamic_home_advantage) - elo[away]) / 400))
+            
             elo[home] += K_FACTOR * (S_home - home_E)
             elo[away] += K_FACTOR * (S_away - away_E)
-        return teams, elo, current_wins, dynamic_home_advantage
-    except Exception:
-        logging.error("Error in load_and_prepare_data", exc_info=True)
-        raise
-
-def load_remaining_games(elo, teams):
-    try:
-        remaining_games = pd.read_csv(os.path.join(INPUT_DIR, "remaining_games.csv")).to_dict(orient="records")
-        for game in remaining_games:
-            game['Home'] = game['Home'].strip()
-            game['Away'] = game['Away'].strip()
-            for team in [game['Home'], game['Away']]:
-                if team not in elo:
-                    elo[team] = INITIAL_ELO
-                    teams.append(team)
-        return remaining_games
-    except Exception:
-        logging.error("Error in load_remaining_games", exc_info=True)
+            
+        remaining_games = scheduled_games.to_dict(orient="records")
+        
+        return teams, elo, current_wins, dynamic_home_advantage, remaining_games
+    except Exception as e:
+        logging.error(f"Error in load_and_prepare_data: {e}", exc_info=True)
         raise
 
 def run_simulation(teams, elo, current_wins, remaining_games, home_adv):
     try:
         final_positions = {team: [0]*len(teams) for team in teams}
         wins_sum = {team: 0 for team in teams}
+        
         for _ in range(N_SIMULATIONS):
             standings = copy.deepcopy(current_wins)
+            
             for game in remaining_games:
                 home, away = game['Home'], game['Away']
+                if not home or not away or home not in elo or away not in elo:
+                    continue
+                    
                 home_elo = elo[home] + home_adv
                 away_elo = elo[away]
                 p_home_win = 1 / (1 + 10 ** ((away_elo - home_elo) / 400))
+                
                 if np.random.rand() < p_home_win:
                     standings[home] += 1
                 else:
                     standings[away] += 1
+                    
             sorted_teams = sorted(teams, key=lambda t: (standings[t], elo[t]), reverse=True)
+            
             for pos, team in enumerate(sorted_teams, start=1):
                 final_positions[team][pos-1] += 1
                 wins_sum[team] += standings[team]
+                
         return final_positions, wins_sum
     except Exception:
         logging.error("Error in run_simulation", exc_info=True)
@@ -99,64 +152,139 @@ def compute_file_hash(filepath):
     return hasher.hexdigest()
 
 def get_input_hashes():
-    input_dir = INPUT_DIR
-    files = {"results.csv": os.path.join(input_dir, "results.csv"),
-             "remaining_games.csv": os.path.join(input_dir, "remaining_games.csv")}
-    hashes = {}
-    for name, path in files.items():
-        hashes[name] = compute_file_hash(path)
-    return hashes
+    input_file = os.path.join(INPUT_DIR, "euroleague_regular_season_games.csv")
+    if os.path.exists(input_file):
+        return {os.path.basename(input_file): compute_file_hash(input_file)}
+    return {"euroleague_regular_season_games.csv": "file_not_found"}
 
-def backup_input_data_zip(sim_folder):
+def backup_input_data_zip(output_folder):
     from zipfile import ZipFile
-    data_zip_path = os.path.join(sim_folder, "input_data.zip")
-    csv_files = [os.path.join(INPUT_DIR, "results.csv"), os.path.join(INPUT_DIR, "remaining_games.csv")]
-    with ZipFile(data_zip_path, 'w') as zipf:
-         for file in csv_files:
-             if os.path.exists(file):
-                  zipf.write(file, arcname=os.path.basename(file))
+    zip_path = os.path.join(output_folder, "input_data.zip")
+    input_file = os.path.join(INPUT_DIR, "euroleague_regular_season_games.csv")
+    
+    if os.path.exists(input_file):
+        with ZipFile(zip_path, 'w') as zipf:
+            zipf.write(input_file, arcname=os.path.basename(input_file))
+
+def extract_round_numbers(df):
+    round_data = []
+    
+    for idx, row in df.iterrows():
+        first_col = str(row.iloc[0]) if pd.notna(row.iloc[0]) else ""
+        if first_col.startswith("Round "):
+            try:
+                round_num = int(''.join(filter(str.isdigit, first_col)))
+                round_data.append(round_num)
+            except (ValueError, TypeError):
+                pass
+    
+    return round_data
+
+def find_rounds_with_unplayed_games(df):
+    rounds_with_unplayed_games = []
+    current_round = None
+    
+    for _, row in df.iterrows():
+        first_col = str(row.iloc[0]) if pd.notna(row.iloc[0]) else ""
+        if first_col.startswith("Round "):
+            try:
+                round_num = int(''.join(filter(str.isdigit, first_col)))
+                current_round = round_num
+            except (ValueError, TypeError):
+                current_round = None
+        elif current_round is not None and pd.notna(row.get("TEAM_A")) and pd.notna(row.get("TEAM_B")):
+            if pd.notna(row.get("A_SCORE")) and row.get("A_SCORE") == '-':
+                rounds_with_unplayed_games.append(current_round)
+    
+    return sorted(set(rounds_with_unplayed_games)) if rounds_with_unplayed_games else []
+
+def check_round_status(df, round_num):
+    round_games = []
+    in_target_round = False
+    
+    for _, row in df.iterrows():
+        first_col = str(row.iloc[0]) if pd.notna(row.iloc[0]) else ""
+        
+        if first_col == f"Round {round_num}":
+            in_target_round = True
+            continue
+        elif in_target_round and first_col.startswith("Round "):
+            break
+            
+        if in_target_round and pd.notna(row.get("TEAM_A")) and pd.notna(row.get("TEAM_B")):
+            round_games.append(row)
+    
+    total_games = len(round_games)
+    if total_games == 0:
+        return "unknown"
+        
+    unplayed_games = sum(1 for row in round_games if row["A_SCORE"] == '-')
+    
+    if unplayed_games == total_games:
+        return "full"  # All games in this round are unplayed
+    elif unplayed_games == 0:
+        return "complete"  # All games in this round are played
+    else:
+        return "mid_round"  # Some games in this round are played, some unplayed
 
 def prepare_output_directory():
     input_hashes = get_input_hashes()
-    FULL_GAME_COUNT = 4
-    remaining_games_path = os.path.join(INPUT_DIR, "remaining_games.csv")
-    if os.path.exists(remaining_games_path):
+    games_file_path = os.path.join(INPUT_DIR, "euroleague_regular_season_games.csv")
+    
+    round_folder = "unknown_round"
+    stage = "mid_round"
+    min_round = max_round = 0
+    remaining_count = 0
+    
+    if os.path.exists(games_file_path):
         try:
-            df = pd.read_csv(remaining_games_path)
-            remaining_count = df.shape[0]
-            if "Round" in df.columns:
-                min_round = int(df["Round"].min())
-                max_round = int(df["Round"].max())
-                count_min_round = df[df["Round"] == min_round].shape[0]
+            df = pd.read_csv(games_file_path)
+            
+            unplayed_rounds = find_rounds_with_unplayed_games(df)
+            
+            if unplayed_rounds:
+                min_round = min(unplayed_rounds)
+                max_round = max(unplayed_rounds)
                 round_folder = f"R{min_round}-{max_round}"
-                stage = "full" if count_min_round >= FULL_GAME_COUNT else "mid_round"
+                
+                stage = check_round_status(df, min_round)
+                remaining_count = len(df[df["A_SCORE"] == "-"])
             else:
-                round_folder, stage, min_round, max_round, remaining_count = "unknown_round", "mid_round", 0, 0, 0
-        except Exception:
-            round_folder, stage, min_round, max_round, remaining_count = "unknown_round", "mid_round", 0, 0, 0
-    else:
-        round_folder, stage, min_round, max_round, remaining_count = "unknown_round", "mid_round", 0, 0, 0
+                all_rounds = extract_round_numbers(df)
+                
+                if all_rounds:
+                    min_round = max(all_rounds)
+                    max_round = min_round
+                    round_folder = f"R{min_round}"
+                    stage = "complete"
+                    remaining_count = 0
+        except Exception as e:
+            logging.error(f"Error processing game data: {e}")
+    
     now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     unique = uuid.uuid4().hex[:6]
     unique_folder = f"{now}_{unique}"
     new_folder = os.path.join(OUTPUT_DIR, round_folder, stage, unique_folder)
+    
     os.makedirs(new_folder, exist_ok=True)
     os.makedirs(os.path.join(new_folder, "teams"), exist_ok=True)
+    
     backup_input_data_zip(new_folder)
-    import glob
-    csv_files = glob.glob(os.path.join(INPUT_DIR, "*.csv"))
+    
     input_values = {}
-    for csv_file in csv_files:
-        try:
-            with open(csv_file, "r") as f:
-                content = f.read()
-            input_values[os.path.basename(csv_file)] = {
-                "size": len(content),
-                "hash": compute_file_hash(csv_file),
-                "sample": content[:100] if len(content) > 100 else content
-            }
-        except Exception:
-            pass
+    for file_path in [games_file_path]:
+        if os.path.exists(file_path):
+            try:
+                with open(file_path, "r") as f:
+                    content = f.read()
+                input_values[os.path.basename(file_path)] = {
+                    "size": len(content),
+                    "hash": compute_file_hash(file_path),
+                    "sample": content[:100] if len(content) > 100 else content
+                }
+            except Exception:
+                pass
+    
     key_data = {
          "timestamp": now,
          "input_hashes": input_hashes,
@@ -167,16 +295,19 @@ def prepare_output_directory():
     key_file = os.path.join(new_folder, "data_key.json")
     with open(key_file, "w") as f:
          json.dump(key_data, f)
+    
     return new_folder
 
 def update_default_folder(sim_folder):
     default_folder = os.path.join(OUTPUT_DIR, "default")
     sim_key_file = os.path.join(sim_folder, "data_key.json")
+    
     try:
         with open(sim_key_file, "r") as f:
             sim_key = json.load(f)
     except Exception:
         return
+        
     sim_count = sim_key.get("remaining_games_count", 0)
     sim_time_str = sim_key.get("timestamp", "1970-01-01_00-00-00")
     from datetime import datetime as dt
@@ -191,8 +322,9 @@ def update_default_folder(sim_folder):
              default_count = default_key.get("remaining_games_count", 0)
              default_time_str = default_key.get("timestamp", "1970-01-01_00-00-00")
              default_time = dt.strptime(default_time_str, "%Y-%m-%d_%H-%M-%S")
+             
              if sim_count < default_count or (sim_count == default_count and sim_time > default_time):
-                     update_default = True
+                 update_default = True
          except Exception:
              update_default = True
     else:
@@ -237,16 +369,10 @@ def main():
             "desc": "Load and prepare data",
             "func": lambda: context.update(
                 dict(zip(
-                    ["teams", "elo", "current_wins", "home_adv"],
+                    ["teams", "elo", "current_wins", "home_adv", "remaining_games"],
                     load_and_prepare_data()
                 ))
             )
-        },
-        {
-            "desc": "Load remaining games",
-            "func": lambda: context.update({
-                "remaining_games": load_remaining_games(context["elo"], context["teams"])
-            })
         },
         {
             "desc": "Run simulation",
@@ -254,7 +380,7 @@ def main():
                 dict(zip(
                     ["final_positions", "wins_sum"],
                     run_simulation(context["teams"], context["elo"], context["current_wins"],
-                                    context["remaining_games"], context["home_adv"])
+                                   context["remaining_games"], context["home_adv"])
                 ))
             )
         },
@@ -275,17 +401,20 @@ def main():
             "func": lambda: __import__("exporter").export_every_game_prediction_table()
         },
         {
+            "desc": "Export predicted final standings", 
+            "func": lambda: __import__("exporter").export_predicted_final_standings()
+        },
+        {
             "desc": "Export team results",
             "func": lambda: __import__("exporter").export_team_results(context["final_df"], context["teams"])
         },
         {
             "desc": "Generate overall graphs",
-            "func": lambda: generate_graphs(context["final_df"], context["teams"])
+            "func": lambda: generate_graphs(context["final_df"])
         }
     ]
     
     total_steps = len(steps)
-    
     with Progress(
             "[progress.description]{task.description}",
             BarColumn(),

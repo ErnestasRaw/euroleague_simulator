@@ -1,0 +1,307 @@
+Home,Away,HomeScore,AwayScore,Round,Date
+Paris,Olimpia Milano,-,-,30,18.03. 21:30
+Monaco,Fenerbahce,-,-,30,20.03. 20:00
+Olympiacos,Crvena zvezda,-,-,30,20.03. 20:00
+Maccabi Tel Aviv,Virtus Bologna,-,-,30,20.03. 21:15
+Baskonia,Bayern,-,-,30,20.03. 21:30
+Real Madrid,Lyon-Villeurbanne,-,-,30,20.03. 21:45
+Panathinaikos,Alba Berlin,-,-,30,21.03. 21:15
+Barcelona,Zalgiris Kaunas,-,-,30,21.03. 21:30
+Partizan,Anadolu Efes,-,-,30,21.03. 21:45
+Fenerbahce,Paris,-,-,31,25.03. 19:45
+Monaco,Zalgiris Kaunas,-,-,31,25.03. 20:00
+Barcelona,Bayern,-,-,31,25.03. 21:30
+Lyon-Villeurbanne,Olympiacos,-,-,31,25.03. 21:45
+Partizan,Alba Berlin,-,-,31,25.03. 21:45
+Real Madrid,Olimpia Milano,-,-,31,25.03. 21:45
+Anadolu Efes,Baskonia,-,-,31,26.03. 19:30
+Crvena zvezda,Virtus Bologna,-,-,31,26.03. 21:00
+Maccabi Tel Aviv,Panathinaikos,-,-,31,26.03. 21:05
+Lyon-Villeurbanne,Zalgiris Kaunas,-,-,32,27.03. 21:00
+Olympiacos,Monaco,-,-,32,27.03. 21:15
+Bayern,Partizan,-,-,32,27.03. 21:30
+Olimpia Milano,Barcelona,-,-,32,27.03. 21:30
+Anadolu Efes,Maccabi Tel Aviv,-,-,32,28.03. 19:30
+Fenerbahce,Baskonia,-,-,32,28.03. 19:45
+Alba Berlin,Virtus Bologna,-,-,32,28.03. 21:00
+Crvena zvezda,Real Madrid,-,-,32,28.03. 21:00
+Panathinaikos,Paris,-,-,32,28.03. 21:15
+Fenerbahce,Barcelona,-,-,33,02.04. 20:45
+Monaco,Panathinaikos,-,-,33,03.04. 20:00
+Zalgiris Kaunas,Partizan,-,-,33,03.04. 20:00
+Maccabi Tel Aviv,Bayern,-,-,33,03.04. 21:05
+Real Madrid,Paris,-,-,33,03.04. 22:00
+Alba Berlin,Olympiacos,-,-,33,04.04. 21:00
+Crvena zvezda,Anadolu Efes,-,-,33,04.04. 21:00
+Baskonia,Lyon-Villeurbanne,-,-,33,04.04. 21:30
+Virtus Bologna,Olimpia Milano,-,-,33,04.04. 21:30
+Bayern,Fenerbahce,-,-,34,10.04. 21:00
+Lyon-Villeurbanne,Monaco,-,-,34,10.04. 21:00
+Olympiacos,Maccabi Tel Aviv,-,-,34,10.04. 21:15
+Olimpia Milano,Baskonia,-,-,34,10.04. 21:30
+Partizan,Real Madrid,-,-,34,10.04. 21:30
+Paris,Alba Berlin,-,-,34,10.04. 21:45
+Anadolu Efes,Zalgiris Kaunas,-,-,34,11.04. 20:30
+Panathinaikos,Crvena zvezda,-,-,34,11.04. 21:15
+Barcelona,Virtus Bologna,-,-,34,11.04. 21:30
+Barcelona,Partizan,87,80,29,14.03. 21:45
+Bayern,Anadolu Efes,92,97,29,14.03. 21:30
+Olympiacos,Panathinaikos,76,74,29,14.03. 21:15
+Virtus Bologna,Real Madrid,67,80,29,13.03. 21:45
+Maccabi Tel Aviv,Monaco,91,88,29,13.03. 21:05
+Alba Berlin,Baskonia,97,90,29,13.03. 21:00
+Crvena zvezda,Olimpia Milano,80,82,29,13.03. 20:00
+Zalgiris Kaunas,Paris,83,81,29,13.03. 20:00
+Fenerbahce,Lyon-Villeurbanne,92,82,29,13.03. 19:45
+Alba Berlin,Barcelona,85,99,28,07.03. 21:30
+Olympiacos,Partizan,82,70,28,07.03. 21:15
+Lyon-Villeurbanne,Maccabi Tel Aviv,95,102,28,07.03. 21:00
+Anadolu Efes,Virtus Bologna,89,68,28,07.03. 19:30
+Panathinaikos,Real Madrid,85,70,28,06.03. 21:45
+Baskonia,Zalgiris Kaunas,66,65,28,06.03. 21:30
+Bayern,Crvena zvezda,100,82,28,06.03. 21:30
+Olimpia Milano,Fenerbahce,76,100,28,06.03. 21:30
+Paris,Monaco,79,91,28,05.03. 21:30
+Lyon-Villeurbanne,Panathinaikos,93,96,27,28.02. 22:00
+Partizan,Baskonia,86,73,27,28.02. 21:30
+Virtus Bologna,Olympiacos,70,92,27,28.02. 21:00
+Anadolu Efes,Alba Berlin,98,73,27,28.02. 19:30
+Maccabi Tel Aviv,Fenerbahce,94,76,27,27.02. 22:00
+Real Madrid,Barcelona,96,91,27,27.02. 21:45
+Olimpia Milano,Monaco,86,80,27,27.02. 21:30
+Paris,Bayern,93,88,27,27.02. 21:30
+Crvena zvezda,Zalgiris Kaunas,80,86,27,27.02. 21:00
+Barcelona,Olympiacos,88,90,26,07.02. 21:30
+Baskonia,Maccabi Tel Aviv,89,82,26,07.02. 21:30
+Virtus Bologna,Paris,77,83,26,07.02. 21:30
+Monaco,Partizan,69,86,26,07.02. 20:00
+Bayern,Lyon-Villeurbanne,76,67,26,06.02. 21:30
+Panathinaikos,Anadolu Efes,104,89,26,06.02. 21:15
+Alba Berlin,Crvena zvezda,71,77,26,06.02. 20:00
+Zalgiris Kaunas,Olimpia Milano,87,89,26,06.02. 20:00
+Fenerbahce,Real Madrid,78,67,26,06.02. 19:30
+Barcelona,Maccabi Tel Aviv,100,71,25,05.02. 21:30
+Paris,Olympiacos,73,90,25,05.02. 21:30
+Virtus Bologna,Partizan,71,81,25,05.02. 21:30
+Monaco,Baskonia,92,85,25,05.02. 20:00
+Bayern,Olimpia Milano,87,70,25,04.02. 21:45
+Panathinaikos,Fenerbahce,91,90,25,04.02. 21:15
+Crvena zvezda,Lyon-Villeurbanne,73,66,25,04.02. 21:00
+Zalgiris Kaunas,Alba Berlin,73,53,25,04.02. 20:00
+Anadolu Efes,Real Madrid,79,73,25,04.02. 19:30
+Partizan,Crvena zvezda,71,73,24,31.01. 21:30
+Olympiacos,Anadolu Efes,92,89,24,31.01. 21:15
+Monaco,Real Madrid,77,73,24,31.01. 20:00
+Fenerbahce,Virtus Bologna,95,81,24,31.01. 19:30
+Baskonia,Barcelona,88,86,24,30.01. 21:30
+Olimpia Milano,Panathinaikos,87,75,24,30.01. 21:30
+Paris,Lyon-Villeurbanne,91,82,24,30.01. 21:30
+Maccabi Tel Aviv,Alba Berlin,87,93,24,30.01. 21:05
+Zalgiris Kaunas,Bayern,82,97,24,30.01. 20:00
+Olympiacos,Fenerbahce,77,87,23,24.01. 21:15
+Alba Berlin,Bayern,84,99,23,24.01. 21:00
+Lyon-Villeurbanne,Barcelona,100,94,23,24.01. 21:00
+Real Madrid,Baskonia,90,89,23,23.01. 21:45
+Virtus Bologna,Monaco,80,86,23,23.01. 21:30
+Panathinaikos,Zalgiris Kaunas,89,76,23,23.01. 21:15
+Maccabi Tel Aviv,Crvena zvezda,85,73,23,23.01. 21:05
+Anadolu Efes,Olimpia Milano,110,66,23,23.01. 19:30
+Partizan,Paris,92,86,23,22.01. 21:30
+Barcelona,Anadolu Efes,90,80,22,17.01. 21:45
+Baskonia,Panathinaikos,91,77,22,17.01. 21:30
+Bayern,Virtus Bologna,72,82,22,17.01. 21:30
+Crvena zvezda,Monaco,88,82,22,17.01. 21:00 AOT
+Fenerbahce,Zalgiris Kaunas,98,86,22,17.01. 19:45
+Real Madrid,Olympiacos,86,96,22,16.01. 21:45
+Olimpia Milano,Partizan,70,90,22,16.01. 21:30
+Paris,Maccabi Tel Aviv,96,83,22,16.01. 21:30
+Lyon-Villeurbanne,Alba Berlin,96,89,22,16.01. 21:00 AOT
+Barcelona,Panathinaikos,82,73,21,15.01. 21:30
+Bayern,Monaco,95,94,21,15.01. 21:30
+Crvena zvezda,Fenerbahce,91,96,21,15.01. 21:00
+Zalgiris Kaunas,Virtus Bologna,77,68,21,15.01. 20:00
+Real Madrid,Maccabi Tel Aviv,116,113,21,14.01. 21:45
+Baskonia,Olympiacos,101,102,21,14.01. 21:30 AOT
+Olimpia Milano,Alba Berlin,100,68,21,14.01. 21:30
+Paris,Anadolu Efes,88,84,21,14.01. 21:30
+Lyon-Villeurbanne,Partizan,62,93,21,14.01. 21:00
+Virtus Bologna,Baskonia,76,74,20,10.01. 21:45
+Olympiacos,Bayern,112,69,20,10.01. 21:15
+Crvena zvezda,Paris,85,69,20,10.01. 21:00
+Zalgiris Kaunas,Real Madrid,64,83,20,10.01. 20:00
+Anadolu Efes,Lyon-Villeurbanne,76,82,20,10.01. 19:30
+Panathinaikos,Partizan,96,84,20,09.01. 21:15
+Maccabi Tel Aviv,Olimpia Milano,74,107,20,09.01. 21:05
+Monaco,Barcelona,84,98,20,09.01. 20:00
+Fenerbahce,Alba Berlin,90,73,20,09.01. 19:45
+Real Madrid,Bayern,88,76,19,03.01. 22:00
+Partizan,Maccabi Tel Aviv,98,75,19,03.01. 21:30
+Panathinaikos,Virtus Bologna,111,90,19,03.01. 21:15
+Paris,Barcelona,79,90,19,03.01. 21:15
+Fenerbahce,Anadolu Efes,84,76,19,03.01. 19:45
+Baskonia,Crvena zvezda,73,75,19,02.01. 21:30
+Alba Berlin,Monaco,90,105,19,02.01. 21:00
+Lyon-Villeurbanne,Olimpia Milano,66,75,19,02.01. 21:00
+Zalgiris Kaunas,Olympiacos,85,92,19,02.01. 20:00
+Barcelona,Crvena zvezda,74,78,18,27.12. 21:30
+Baskonia,Paris,94,81,18,27.12. 21:30
+Bayern,Panathinaikos,69,80,18,27.12. 21:30
+Partizan,Fenerbahce,90,81,18,27.12. 21:30
+Virtus Bologna,Lyon-Villeurbanne,83,69,18,27.12. 21:30
+Olimpia Milano,Olympiacos,83,84,18,26.12. 21:30
+Maccabi Tel Aviv,Zalgiris Kaunas,95,78,18,26.12. 21:05
+Alba Berlin,Real Madrid,69,80,18,26.12. 20:00
+Monaco,Anadolu Efes,94,75,18,26.12. 20:00
+Olimpia Milano,Bayern,78,79,17,20.12. 22:00
+Crvena zvezda,Maccabi Tel Aviv,81,73,17,20.12. 21:30
+Olympiacos,Alba Berlin,90,85,17,20.12. 21:15
+Virtus Bologna,Barcelona,86,81,17,20.12. 21:00
+Zalgiris Kaunas,Lyon-Villeurbanne,72,78,17,20.12. 20:00
+Anadolu Efes,Partizan,86,77,17,20.12. 19:30
+Real Madrid,Monaco,94,72,17,19.12. 21:45
+Panathinaikos,Baskonia,104,69,17,19.12. 19:45
+Paris,Fenerbahce,83,87,17,03.03. 21:30
+Olympiacos,Virtus Bologna,87,77,16,18.12. 21:15
+Anadolu Efes,Crvena zvezda,89,67,16,18.12. 19:30
+Alba Berlin,Zalgiris Kaunas,66,86,16,17.12. 21:45
+Partizan,Lyon-Villeurbanne,79,82,16,17.12. 21:45
+Barcelona,Fenerbahce,90,63,16,17.12. 21:30
+Paris,Real Madrid,85,96,16,17.12. 21:30
+Panathinaikos,Olimpia Milano,103,74,16,17.12. 21:15
+Maccabi Tel Aviv,Baskonia,85,95,16,17.12. 21:05
+Monaco,Bayern,93,74,16,17.12. 20:00
+Lyon-Villeurbanne,Paris,98,93,15,13.12. 22:00
+Barcelona,Olimpia Milano,81,94,15,13.12. 21:30
+Crvena zvezda,Olympiacos,87,73,15,13.12. 21:30
+Anadolu Efes,Panathinaikos,93,67,15,13.12. 19:30
+Bayern,Maccabi Tel Aviv,98,93,15,12.12. 21:45
+Real Madrid,Zalgiris Kaunas,83,92,15,12.12. 21:45
+Baskonia,Virtus Bologna,81,82,15,12.12. 21:30
+Alba Berlin,Partizan,90,91,15,12.12. 20:00
+Fenerbahce,Monaco,69,99,15,12.12. 19:45
+Olimpia Milano,Lyon-Villeurbanne,92,84,14,06.12. 21:45
+Virtus Bologna,Crvena zvezda,87,94,14,06.12. 21:30
+Olympiacos,Paris,90,96,14,06.12. 21:15
+Monaco,Alba Berlin,100,80,14,06.12. 20:00
+Real Madrid,Fenerbahce,70,82,14,05.12. 21:45
+Bayern,Baskonia,94,80,14,05.12. 21:30
+Partizan,Panathinaikos,91,73,14,05.12. 21:30
+Maccabi Tel Aviv,Barcelona,86,88,14,05.12. 21:05
+Zalgiris Kaunas,Anadolu Efes,85,72,14,05.12. 20:00
+Virtus Bologna,Alba Berlin,88,90,13,04.12. 21:45 AOT
+Olimpia Milano,Crvena zvezda,101,86,13,04.12. 21:30
+Monaco,Olympiacos,80,89,13,04.12. 20:00
+Baskonia,Fenerbahce,88,76,13,03.12. 21:30
+Partizan,Zalgiris Kaunas,84,78,13,03.12. 21:30
+Panathinaikos,Barcelona,90,89,13,03.12. 21:15
+Maccabi Tel Aviv,Paris,81,93,13,03.12. 21:05
+Lyon-Villeurbanne,Real Madrid,80,78,13,03.12. 21:00
+Anadolu Efes,Bayern,101,90,13,03.12. 19:30
+Lyon-Villeurbanne,Anadolu Efes,97,82,12,29.11. 22:00
+Panathinaikos,Monaco,88,91,12,29.11. 21:15
+Crvena zvezda,Bayern,101,77,12,29.11. 21:00
+Fenerbahce,Olimpia Milano,85,91,12,29.11. 19:45
+Barcelona,Real Madrid,90,97,12,28.11. 21:45 AOT
+Paris,Virtus Bologna,81,78,12,28.11. 21:30
+Partizan,Olympiacos,78,70,12,28.11. 21:30
+Alba Berlin,Maccabi Tel Aviv,85,103,12,28.11. 21:00
+Zalgiris Kaunas,Baskonia,70,83,12,28.11. 20:00
+Bayern,Barcelona,100,78,11,22.11. 21:30
+Zalgiris Kaunas,Panathinaikos,84,77,11,22.11. 20:00
+Real Madrid,Alba Berlin,98,84,11,21.11. 21:45
+Olimpia Milano,Maccabi Tel Aviv,98,86,11,21.11. 21:30
+Olympiacos,Baskonia,92,69,11,21.11. 21:15
+Crvena zvezda,Partizan,77,89,11,21.11. 21:00
+Monaco,Lyon-Villeurbanne,103,92,11,21.11. 20:00
+Anadolu Efes,Paris,84,93,11,21.11. 19:30
+Virtus Bologna,Fenerbahce,82,86,11,20.11. 21:30
+Barcelona,Paris,87,103,10,15.11. 21:30
+Partizan,Olimpia Milano,81,88,10,15.11. 21:30
+Virtus Bologna,Panathinaikos,77,82,10,15.11. 21:30
+Zalgiris Kaunas,Fenerbahce,65,72,10,15.11. 20:00
+Real Madrid,Anadolu Efes,64,74,10,14.11. 21:45
+Baskonia,Monaco,75,87,10,14.11. 21:30
+Bayern,Alba Berlin,115,88,10,14.11. 21:30
+Lyon-Villeurbanne,Crvena zvezda,77,74,10,14.11. 21:00
+Maccabi Tel Aviv,Olympiacos,91,94,10,14.11. 20:00
+Paris,Zalgiris Kaunas,83,77,9,13.11. 21:30
+Partizan,Barcelona,79,87,9,13.11. 19:00
+Real Madrid,Virtus Bologna,98,86,9,12.11. 21:45
+Baskonia,Anadolu Efes,84,89,9,12.11. 21:30
+Panathinaikos,Maccabi Tel Aviv,93,87,9,12.11. 21:15
+Alba Berlin,Olimpia Milano,105,101,9,12.11. 21:00 AOT
+Olympiacos,Lyon-Villeurbanne,94,92,9,12.11. 21:00
+Monaco,Crvena zvezda,90,98,9,12.11. 20:00
+Fenerbahce,Bayern,87,76,9,12.11. 19:45
+Barcelona,Baskonia,91,68,8,08.11. 21:30
+Virtus Bologna,Maccabi Tel Aviv,84,77,8,08.11. 21:30
+Panathinaikos,Olympiacos,89,94,8,08.11. 21:15
+Lyon-Villeurbanne,Fenerbahce,73,77,8,08.11. 21:00
+Anadolu Efes,Monaco,69,81,8,08.11. 19:00
+Bayern,Zalgiris Kaunas,77,74,8,07.11. 21:45
+Paris,Partizan,74,71,8,07.11. 21:45
+Olimpia Milano,Real Madrid,85,76,8,07.11. 21:30
+Crvena zvezda,Alba Berlin,92,71,8,07.11. 20:00
+Paris,Baskonia,67,65,7,01.11. 21:45
+Crvena zvezda,Panathinaikos,77,81,7,01.11. 21:00
+Lyon-Villeurbanne,Bayern,71,84,7,01.11. 21:00
+Zalgiris Kaunas,Monaco,63,62,7,01.11. 20:00
+Fenerbahce,Partizan,89,72,7,01.11. 19:45
+Olimpia Milano,Virtus Bologna,99,90,7,31.10. 21:30
+Olympiacos,Barcelona,95,74,7,31.10. 21:15
+Maccabi Tel Aviv,Real Madrid,79,78,7,31.10. 21:05
+Alba Berlin,Anadolu Efes,70,86,7,31.10. 21:00
+Partizan,Monaco,74,79,6,30.10. 21:45
+Panathinaikos,Lyon-Villeurbanne,92,68,6,30.10. 21:15
+Zalgiris Kaunas,Crvena zvezda,86,84,6,30.10. 20:00
+Virtus Bologna,Bayern,84,87,6,29.10. 22:00
+Baskonia,Olimpia Milano,88,83,6,29.10. 21:30
+Olympiacos,Real Madrid,79,69,6,29.10. 21:15
+Alba Berlin,Paris,83,92,6,29.10. 20:30
+Fenerbahce,Maccabi Tel Aviv,84,82,6,29.10. 20:30
+Anadolu Efes,Barcelona,88,97,6,29.10. 19:30
+Bayern,Olympiacos,84,80,5,25.10. 21:45
+Barcelona,Lyon-Villeurbanne,90,83,5,25.10. 21:30
+Fenerbahce,Panathinaikos,76,81,5,25.10. 20:45
+Real Madrid,Crvena zvezda,95,72,5,24.10. 21:45
+Baskonia,Alba Berlin,80,57,5,24.10. 21:30
+Olimpia Milano,Anadolu Efes,84,96,5,24.10. 21:30
+Monaco,Paris,80,87,5,24.10. 20:00
+Zalgiris Kaunas,Maccabi Tel Aviv,78,63,5,24.10. 20:00
+Partizan,Virtus Bologna,69,70,5,23.10. 21:30
+Lyon-Villeurbanne,Baskonia,76,69,4,18.10. 21:30
+Crvena zvezda,Barcelona,94,98,4,18.10. 21:00 AOT
+Anadolu Efes,Olympiacos,91,89,4,18.10. 20:30
+Monaco,Virtus Bologna,101,85,4,18.10. 20:00
+Bayern,Paris,109,107,4,17.10. 21:45
+Real Madrid,Panathinaikos,90,86,4,17.10. 21:45
+Olimpia Milano,Zalgiris Kaunas,82,85,4,17.10. 21:30
+Maccabi Tel Aviv,Partizan,79,91,4,17.10. 21:05
+Alba Berlin,Fenerbahce,71,78,4,17.10. 20:30
+Barcelona,Monaco,86,71,3,16.10. 21:30
+Partizan,Bayern,86,78,3,15.10. 21:45
+Baskonia,Real Madrid,76,72,3,15.10. 21:30
+Paris,Panathinaikos,84,80,3,15.10. 21:30
+Virtus Bologna,Zalgiris Kaunas,68,71,3,15.10. 21:30
+Olympiacos,Olimpia Milano,89,68,3,15.10. 21:15
+Maccabi Tel Aviv,Anadolu Efes,93,91,3,15.10. 21:05
+Fenerbahce,Crvena zvezda,57,76,3,15.10. 20:45
+Alba Berlin,Lyon-Villeurbanne,84,79,3,15.10. 20:30
+Barcelona,Alba Berlin,88,73,2,11.10. 21:30
+Olimpia Milano,Paris,79,74,2,11.10. 21:30
+Olympiacos,Zalgiris Kaunas,74,68,2,11.10. 21:15
+Real Madrid,Partizan,93,86,2,10.10. 21:45
+Panathinaikos,Bayern,94,79,2,10.10. 21:15
+Lyon-Villeurbanne,Virtus Bologna,87,85,2,10.10. 21:00
+Anadolu Efes,Fenerbahce,78,83,2,10.10. 20:30
+Crvena zvezda,Baskonia,78,71,2,09.10. 21:00
+Monaco,Maccabi Tel Aviv,85,79,2,09.10. 20:00
+Paris,Crvena zvezda,77,80,1,04.10. 22:00
+Virtus Bologna,Anadolu Efes,67,76,1,04.10. 22:00
+Fenerbahce,Olympiacos,82,71,1,04.10. 20:30
+Maccabi Tel Aviv,Lyon-Villeurbanne,89,82,1,03.10. 22:00
+Bayern,Real Madrid,97,89,1,03.10. 21:45
+Baskonia,Partizan,88,82,1,03.10. 21:30
+Monaco,Olimpia Milano,93,80,1,03.10. 20:00
+Zalgiris Kaunas,Barcelona,74,67,1,03.10. 20:00
+Alba Berlin,Panathinaikos,77,87,1,03.10. 19:45

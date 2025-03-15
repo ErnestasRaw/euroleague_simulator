@@ -9,7 +9,7 @@ This project simulates the Euroleague season by analyzing historical game result
 1. Historical game data is loaded and processed to calculate initial Elo ratings and determine the dynamic home advantage.
 2. The remaining games are simulated thousands of times (based on a predefined number of simulations) to predict final standings.
 3. Results are exported as CSV files and visualized in tables and graphs.
-4. Each team’s performance details are generated into individual reports and images.
+4. Each team's performance details are generated into individual reports and images.
 
 ### Home Advantage Calculation
 
@@ -24,11 +24,13 @@ The simulation exports several CSV and image files inside the output subfolder:
   - `final_prediction_table` – Overall prediction of final standings after regular season.
     ![Final Prediction Table](output/default/final_prediction_table.png)
   - `every_game_prediction` – Predictions for each upcoming game.
-    ![Every game prediction](output/default/every_game_prediction_table.png)
+    ![Every Game Prediction](output/default/every_game_prediction_table.png)
+  - `predicted_final_standings` – Predicted standings if all remaining games follow the most likely outcome.
+    ![Predicted Final Standings](output/default/predicted_final_standings.png)
 
 - Image files:
   - `average_wins.png` – Bar chart showing expected wins per team.
-    ![Average wins](output/default/average_wins.png)
+    ![Average Wins](output/default/average_wins.png)
 
 ## Individual Team Results (Example: Zalgiris Kaunas)
 
@@ -36,9 +38,9 @@ For each team, a folder is created under `output/default/teams/<TeamName>`. For 
 
 - `team_detail.csv` – Detailed CSV output for Zalgiris Kaunas.
 - `team_detail_table.png` – An image of the detailed table.
-  ![Team detail table](output/default/teams/Zalgiris_Kaunas/team_detail_table.png)
+  ![Team Detail Table](output/default/teams/Zalgiris_Kaunas/team_detail_table.png)
 - `finishing_probabilities.png` – A graph of regular season finishing probabilities.
-  ![Team finishing progbabilities](output/default/teams/Zalgiris_Kaunas/finishing_probabilities.png)
+  ![Team Finishing Probabilities](output/default/teams/Zalgiris_Kaunas/finishing_probabilities.png)
 
 ## Dependencies
 
@@ -69,4 +71,4 @@ python script.py
    python script.py
    ```
 
-Enjoy the simulation and track your team’s progress over time!
+Enjoy the simulation and track your team's progress over time!
