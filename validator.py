@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from constants import INPUT_DIR
+from constants import INITIAL_ELO, K_FACTOR
 
 def validate_data():
     games_path = os.path.join(INPUT_DIR, "euroleague_regular_season_games.csv")
@@ -72,6 +73,36 @@ def validate_data():
     
     if errors:
         print(f"Warning: Unbalanced schedule detected:\n" + "\n".join(errors))
+
+    home_adv = 3.5
+    team_elo = {team: INITIAL_ELO for team in teams}
+    n_games = 0
+    correct_predictions = 0
+    for _, row in df_games.iterrows():
+        if (pd.notna(row.get('A_SCORE')) and row.get('A_SCORE') != '-' and 
+            pd.notna(row.get('B_SCORE')) and row.get('B_SCORE') != '-'):
+            try:
+                home_score = int(row['A_SCORE'])
+                away_score = int(row['B_SCORE'])
+            except Exception:
+                continue
+            home_team = str(row['TEAM_A']).strip()
+            away_team = str(row['TEAM_B']).strip()
+            p_home = 1 / (1 + 10 ** ((team_elo.get(away_team, INITIAL_ELO) - (team_elo.get(home_team, INITIAL_ELO) + home_adv)) / 400))
+            predicted_winner = home_team if p_home >= 0.5 else away_team
+            actual_winner = home_team if home_score > away_score else away_team
+            if predicted_winner == actual_winner:
+                correct_predictions += 1
+            n_games += 1
+            S_home = 1 if home_score > away_score else 0
+            S_away = 1 - S_home
+            home_E = 1 / (1 + 10 ** ((team_elo.get(away_team, INITIAL_ELO) - (team_elo.get(home_team, INITIAL_ELO) + home_adv)) / 400))
+            away_E = 1 / (1 + 10 ** (((team_elo.get(home_team, INITIAL_ELO) + home_adv) - team_elo.get(away_team, INITIAL_ELO)) / 400))
+            team_elo[home_team] = team_elo.get(home_team, INITIAL_ELO) + K_FACTOR * (S_home - home_E)
+            team_elo[away_team] = team_elo.get(away_team, INITIAL_ELO) + K_FACTOR * (S_away - away_E)
+    if n_games:
+        accuracy = correct_predictions / n_games * 100
+        print(f"Model Accuracy on {n_games} completed games: {accuracy:.2f}%")
 
     print("Validation passed: Regular season structure is correct with full results and remaining games.")
 

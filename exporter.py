@@ -69,6 +69,12 @@ def create_styled_df(df, title, target_cols, apply_gradient=True):
     return styled_df
 
 def export_table_image(df, out_path, title, target_cols, dpi=80, max_rows=None):
+    if out_path.lower().endswith(".png"):
+        try:
+            round_info = os.path.basename(os.path.dirname(os.path.dirname(constants.OUTPUT_DIR)))
+            title += f" ({round_info})"
+        except Exception:
+            pass
     styled_df = create_styled_df(df, title, target_cols)
     try:
         import dataframe_image as dfi

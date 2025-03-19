@@ -72,21 +72,27 @@ def load_and_prepare_data():
         completed_games = pd.DataFrame(completed_games_data)
         scheduled_games = pd.DataFrame(scheduled_games_data)
         
-        # Calculate dynamic home advantage if we have completed games
-        if not completed_games.empty:
-            dynamic_home_advantage = (completed_games["HomePTS"] - completed_games["AwayPTS"]).mean()
-        else:
-            dynamic_home_advantage = 3.5  # Default home advantage if no completed games
-            
-        # Get unique teams from both completed and scheduled games
+        default_adv = 3.5  # 
+        home_margin_info = {}
+        for _, row in completed_games.iterrows():
+            team = row["HomeTeam"]
+            margin = row["HomePTS"] - row["AwayPTS"]
+            home_margin_info.setdefault(team, []).append(margin)
+        
         teams_completed = set(completed_games["HomeTeam"].tolist() + completed_games["AwayTeam"].tolist()) if not completed_games.empty else set()
         teams_scheduled = set(scheduled_games["Home"].tolist() + scheduled_games["Away"].tolist()) if not scheduled_games.empty else set()
         teams = list(filter(None, teams_completed.union(teams_scheduled)))
         
+        home_advantages = {}
+        for team in teams:
+            if team in home_margin_info and len(home_margin_info[team]) > 0:
+                home_advantages[team] = np.mean(home_margin_info[team])
+            else:
+                home_advantages[team] = default_adv
+        
         elo = {team: INITIAL_ELO for team in teams}
         current_wins = {team: 0 for team in teams}
         
-        # Update ELO ratings based on completed games
         for _, row in completed_games.iterrows():
             home, away = row["HomeTeam"], row["AwayTeam"]
             home_pts, away_pts = row["HomePTS"], row["AwayPTS"]
@@ -98,15 +104,16 @@ def load_and_prepare_data():
                 S_home, S_away = 0, 1
                 current_wins[away] += 1
                 
-            home_E = 1 / (1 + 10 ** ((elo[away] - (elo[home] + dynamic_home_advantage)) / 400))
-            away_E = 1 / (1 + 10 ** (((elo[home] + dynamic_home_advantage) - elo[away]) / 400))
+            team_home_adv = home_advantages.get(home, default_adv)
+            home_E = 1 / (1 + 10 ** ((elo[away] - (elo[home] + team_home_adv)) / 400))
+            away_E = 1 / (1 + 10 ** (((elo[home] + team_home_adv) - elo[away]) / 400))
             
             elo[home] += K_FACTOR * (S_home - home_E)
             elo[away] += K_FACTOR * (S_away - away_E)
             
         remaining_games = scheduled_games.to_dict(orient="records")
         
-        return teams, elo, current_wins, dynamic_home_advantage, remaining_games
+        return teams, elo, current_wins, home_advantages, remaining_games
     except Exception as e:
         logging.error(f"Error in load_and_prepare_data: {e}", exc_info=True)
         raise
@@ -124,7 +131,8 @@ def run_simulation(teams, elo, current_wins, remaining_games, home_adv):
                 if not home or not away or home not in elo or away not in elo:
                     continue
                     
-                home_elo = elo[home] + home_adv
+                team_home_adv = home_adv.get(home, 3.5)
+                home_elo = elo[home] + team_home_adv
                 away_elo = elo[away]
                 p_home_win = 1 / (1 + 10 ** ((away_elo - home_elo) / 400))
                 
@@ -320,7 +328,7 @@ def update_default_folder(sim_folder):
              with open(default_key_file, "r") as f:
                  default_key = json.load(f)
              default_count = default_key.get("remaining_games_count", 0)
-             default_time_str = default_key.get("timestamp", "1970-01-01_00-00-00")
+             default_time_str = default_key.get("timestamp", "1970-01-01_%H-%M-%S")
              default_time = dt.strptime(default_time_str, "%Y-%m-%d_%H-%M-%S")
              
              if sim_count < default_count or (sim_count == default_count and sim_time > default_time):
@@ -359,7 +367,7 @@ def main():
     console = Console()
     completed_steps = []
     context = {}
-
+    
     steps = [
         {
             "desc": "Data validation",
@@ -389,7 +397,7 @@ def main():
             "func": lambda: context.update({
                 "final_df": export_results(context["teams"], context["elo"],
                                             context["final_positions"], context["wins_sum"],
-                                            context["home_adv"])
+                                            np.mean(list(context["home_adv"].values())))
             })
         },
         {
